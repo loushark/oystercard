@@ -1,6 +1,6 @@
 class Oystercard
 
-attr_accessor :balance, :entry_station, :history, :journey
+attr_accessor :balance, :history, :journey
 DEFAULT_BALANCE = 90
 # MINIMUM_FARE = 1
 # COMPLETE_JOURNEY = { entry: nil, exit: nil }
@@ -22,12 +22,12 @@ DEFAULT_BALANCE = 90
 
   def touch_in(station)
     raise "Insufficient funds on card" if @balance < Journey::MINIMUM_FARE
-    @journey.start_journey(station)
+    in_journey? ? deduct(@journey.fare) : @journey.start_journey(station)
   end
 
   def touch_out(station)
-    deduct(@journey.fare)
     @journey.end_journey(station)
+    deduct(@journey.fare)
     journey_to_history
   end
 

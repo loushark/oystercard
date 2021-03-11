@@ -51,9 +51,23 @@ describe Journey do
 
   describe "#fare" do
     it "provides the minimum fare for each journey" do
+      test_journey.start_journey(entry_station)
+      test_journey.end_journey(exit_station)
       expect(test_journey.fare).to eq Journey::MINIMUM_FARE
     end
   end
+
+  it "deducts a penalty fare if there is no entry station on complete journey" do
+    test_journey.end_journey(exit_station)
+    expect(test_journey.fare).to eq Journey::PENALTY_FARE
+  end
+
+  it "deducts a penalty fare if touched in twice" do
+    test_journey.start_journey(entry_station)
+    test_journey.start_journey(entry_station)
+    expect(test_journey.fare).to eq Journey::PENALTY_FARE
+  end
+
 end
 
 

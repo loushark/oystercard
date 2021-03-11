@@ -96,11 +96,16 @@ let(:minimum_fare) { 1 }
        card.touch_out(station2)
        expect(card.journey.current_journey).to eq({ entry: nil, exit: nil })
      end
-
    end
 
    it "returns an empty history when card is new" do
      expect(card.history).to eq []
+   end
+
+   it "charges a penalty fare if not touched out on previous journey" do
+     card.top_up(20)
+     card.touch_in(station2)
+    expect { card.touch_in(station) }.to change(card, :balance).by -6
    end
 end
 
