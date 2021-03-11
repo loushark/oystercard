@@ -62,9 +62,27 @@ it should be responsible for:
 - [x] Update your test suite to reflect a new Journey class
 - [x] Create a new class Journey and move the functionality that relates to x journey from Oystercard to Journey
 - [x] Make sure all tests pass, all existing functionality is preserved
-- [ ] The `#fare` method should return the minimum fare (for the moment), or the penalty fare of 6 if there was either no entry station or no  exit station.
-- [ ] Make sure the entire codebase is DRY
-- [ ] Make sure all methods are three lines or shorter
+- [x] The `#fare` method should return the minimum fare (for the moment), or the penalty fare of 6 if there was either no entry station or no  exit station.
+- [x] Make sure the entire codebase is DRY
+- [x] Make sure all methods are three lines or shorter
+
+Challenge 15
+
+It should be responsible for
+ - starting a journey
+ - ending a journey
+ - current_journey
+ - returning a list of journeys.
+ - journey_class
+
+- [ ] Write up a plan for how you will interact with your code and manually test in IRB.
+- [ ] test drive the development of `JourneyLog` class
+- [ ] Initialise the `JourneyLog` with a `journey_class` parameter (hint: `journey_class` expects an object that knows how to create `Journey`s.  Can you think of an object that already does this?)
+- [ ] `#start` should start a new journey with an entry station
+- [ ] a private method `#current_journey` should return an incomplete journey or create a new journey
+- [ ] `#finish` should add an exit station to the `current_journey`
+- [ ] `#journeys` should return a list of all previous journeys without exposing the internal array to external modification
+- [ ] remove redundant code from OysterCard class
 
 
 

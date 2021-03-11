@@ -7,7 +7,7 @@ describe Journey do
 
   describe "#start_journey" do
     it "starts a journey" do
-      expect(test_journey.start_journey(entry_station)).to eq "Journey started."
+      expect(test_journey.start_journey(entry_station)).to eq entry_station
     end
   end
 

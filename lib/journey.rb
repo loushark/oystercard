@@ -10,7 +10,7 @@ class Journey
 
   def start_journey(entry_station)
     @current_journey[:entry] = entry_station
-    "Journey started."
+    # "Journey started."
   end
 
   def end_journey(exit_station)

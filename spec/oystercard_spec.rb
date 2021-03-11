@@ -84,7 +84,7 @@ let(:minimum_fare) { 1 }
 
      it "resets entry_station to nil on touch_out" do
        card.touch_out(station2)
-       expect(card.entry_station).to eq(nil)
+       expect(card.journey.current_journey[:entry]).to eq(nil)
      end
 
      it "stores one completed journey history" do

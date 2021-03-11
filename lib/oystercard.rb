@@ -1,3 +1,7 @@
+require_relative 'journey.rb'
+require_relative 'station.rb'
+
+
 class Oystercard
 
 attr_accessor :balance, :history, :journey
