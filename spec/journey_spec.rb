@@ -34,8 +34,26 @@ describe Journey do
       # expect(test_journey.in_journey?).to eq(true)
       expect(test_journey).to be_in_journey
     end
+
+    it "returns false when not_in_journey" do
+      expect(test_journey).not_to be_in_journey
+    end
   end
 
+  describe "#complete_journey?" do
+    it "returns true when touched out and both entry and exit are not nil" do
+      test_journey.start_journey(entry_station)
+      test_journey.end_journey(exit_station)
+      # expect(test_journey.complete_journey?).to be true
+      expect(test_journey).to be_complete_journey
+    end
+  end
+
+  describe "#fare" do
+    it "provides the minimum fare for each journey" do
+      expect(test_journey.fare).to eq Journey::MINIMUM_FARE
+    end
+  end
 end
 
 

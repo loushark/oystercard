@@ -4,6 +4,8 @@ describe Oystercard do
 alias_method :card, :subject
 let(:station) { double('Hackney') }
 let(:station2) { double('Moorgate') }
+let(:minimum_fare) { 1 }
+# stub_const("MINIMUM_FARE", 1)
 
   it "Checking balance on card" do
     expect(card).to respond_to(:balance)
@@ -42,7 +44,7 @@ let(:station2) { double('Moorgate') }
   end
 
   it "changes in_journey to true when touch_in" do
-    card.top_up(Oystercard::MINIMUM_FARE)
+    card.top_up(minimum_fare)
     card.touch_in(station)
     expect(card.in_journey?).to eq(true)
   end
@@ -52,7 +54,7 @@ let(:station2) { double('Moorgate') }
   end
 
   it "changes in_journey to false when touch_out" do
-    card.top_up(Oystercard::MINIMUM_FARE)
+    card.top_up(minimum_fare)
     card.touch_in(station)
     card.touch_out(station2)
     expect(card.in_journey?).to eq false
@@ -63,9 +65,9 @@ let(:station2) { double('Moorgate') }
   end
 
   it "reduces the balance by the minimum fare on touch_out" do
-    card.top_up(Oystercard::MINIMUM_FARE)
+    card.top_up(minimum_fare)
     card.touch_in(station)
-    expect { card.touch_out(station2) }.to change { card.balance }.by(-Oystercard::MINIMUM_FARE)
+    expect { card.touch_out(station2) }.to change { card.balance }.by(-minimum_fare)
   end
 
   context "remembering stations" do
