@@ -8,7 +8,7 @@ MINIMUM_FARE = 1
   def initialize
     @balance = 0
     @history = []
-    @journey = { entry: nil, exit: nil }
+    @journey = Journey.new
   end
 
   def top_up(amount)
@@ -17,17 +17,17 @@ MINIMUM_FARE = 1
   end
 
   def in_journey?
-    @journey[:entry] != nil ? true : false
+    @journey.current_journey[:entry] != nil ? true : false
   end
 
   def touch_in(station)
     raise "Insufficient funds on card" if @balance < MINIMUM_FARE
-    @journey[:entry] = station
+    @journey.current_journey[:entry] = station
   end
 
   def touch_out(station)
     @balance -= MINIMUM_FARE
-    @journey[:exit] = station
+    @journey.current_journey[:exit] = station
     journey_to_history
   end
 
@@ -39,7 +39,7 @@ MINIMUM_FARE = 1
 
   def journey_to_history
     @history << @journey
-    @journey = { entry: nil, exit: nil }
+    @journey = Journey.new
   end
 
 end

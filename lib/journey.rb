@@ -10,4 +10,13 @@ class Journey
     @current_journey[:entry] = entry_station
     "Journey started."
   end
+
+  def end_journey(exit_station)
+    @current_journey[:exit] = exit_station
+  end
+
+  def in_journey?
+    current_journey[:entry] != nil ? true : false
+  end
+
 end

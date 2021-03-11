@@ -69,13 +69,15 @@ let(:station2) { double('Moorgate') }
   end
 
   context "remembering stations" do
+    let(:test_journey) { instance_double("Journey", current_journey: { entry: nil, exit: nil } )}
+
     before do
       card.top_up(20)
       card.touch_in(station)
     end
 
     it "remembers the touch_in station" do
-      expect(card.journey[:entry]).to eq(station)
+      expect(card.journey.current_journey[:entry]).to eq(station)
     end
 
      it "resets entry_station to nil on touch_out" do
@@ -85,12 +87,12 @@ let(:station2) { double('Moorgate') }
 
      it "stores one completed journey history" do
        card.touch_out(station2)
-       expect(card.history[0]).to eq({ entry: station, exit: station2 })
+       expect(card.history[0].current_journey).to eq({ entry: station, exit: station2 })
      end
 
      it "resets journey when touched out" do
        card.touch_out(station2)
-       expect(card.journey).to eq({ entry: nil, exit: nil })
+       expect(card.journey.current_journey).to eq({ entry: nil, exit: nil })
      end
 
    end
